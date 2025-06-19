@@ -5,11 +5,13 @@ static String lastName = "";
 static bool gotFirstName = false;
 static bool gotLastName = false;
 
+
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
     ;
   }
+
   Serial.println("Enter your first name:");
 }
 
@@ -29,13 +31,16 @@ void loop() {
       lastName = Serial.readStringUntil('\n');
       lastName.trim();
       gotLastName = true;
+
     }
     return;
   }
 
   Serial.print("Hello, ");
+
   Serial.print(firstName);
   Serial.print(" ");
   Serial.println(lastName);
+
   delay(1000);
 }
