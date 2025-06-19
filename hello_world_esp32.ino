@@ -1,27 +1,41 @@
 #include <Arduino.h>
 
-static String name = "";
-static bool gotName = false;
+static String firstName = "";
+static String lastName = "";
+static bool gotFirstName = false;
+static bool gotLastName = false;
 
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
     ;
   }
-  Serial.println("Enter your name:");
+  Serial.println("Enter your first name:");
 }
 
 void loop() {
-  if (!gotName) {
+  if (!gotFirstName) {
     if (Serial.available()) {
-      name = Serial.readStringUntil('\n');
-      name.trim();
-      gotName = true;
+      firstName = Serial.readStringUntil('\n');
+      firstName.trim();
+      gotFirstName = true;
+      Serial.println("Enter your last name:");
+    }
+    return;
+  }
+
+  if (!gotLastName) {
+    if (Serial.available()) {
+      lastName = Serial.readStringUntil('\n');
+      lastName.trim();
+      gotLastName = true;
     }
     return;
   }
 
   Serial.print("Hello, ");
-  Serial.println(name);
+  Serial.print(firstName);
+  Serial.print(" ");
+  Serial.println(lastName);
   delay(1000);
 }
